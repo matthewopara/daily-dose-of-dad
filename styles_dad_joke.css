@@ -1,0 +1,30 @@
+.content {
+    margin-top: 20px;
+}
+
+#dad-joke-box {
+    border: 1px solid black;
+    min-height: 50px;
+}
+
+.input-rows {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.save-button {
+    width: 100%;
+}
+
+#dad-image-container {
+    margin: auto;
+    width: 80%;
+}
+
+#dad-image {
+    width: 100%;
+}
+
+#voices-select {
+    width: 100%;
+}
