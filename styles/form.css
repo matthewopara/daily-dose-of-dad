@@ -1,0 +1,21 @@
+#sign-up {
+    text-align: center;
+}
+
+#form {
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+input[type=submit] {
+    margin: auto;
+    display: block;
+}
+
+@media (max-width: 767px) {
+    #form {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
+}
+
