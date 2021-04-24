@@ -1,0 +1,16 @@
+#saved-jokes {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#list {
+    margin-top: 20px;
+}
+
+.sound-button {
+    width: 25px;
+}
+
+[class*="col-"] {
+    margin-bottom: 30px;
+}
