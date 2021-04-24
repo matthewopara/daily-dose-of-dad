@@ -16,7 +16,7 @@
         <div class="row">
           <div class="col-12 col-md-6">
             <div id="dad-image-container">
-              <img id="dad-image" src="images/dads&moms/dad1.jpg" alt="Dad/Mom">
+              <input id="dad-image" type="image" src="images/dads&moms/dad1.jpg" />
             </div>
           </div>
           <div class="col">
