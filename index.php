@@ -30,12 +30,12 @@
               <div class="input-rows">
                 Voices
                 <select id="voices-select">
-                  <option value="dad1">Dad #1</option>
-                  <option value="dad2">Dad #2</option>
-                  <option value="dad3">Dad #3</option>
-                  <option value="mom1">Mom #1</option>
-                  <option value="mom2">Mom #2</option>
-                  <option value="mom3">Mom #3</option>
+                  <option value="0">Dad #1</option>
+                  <option value="1">Dad #2</option>
+                  <option value="2">Dad #3</option>
+                  <option value="3">Mom #1</option>
+                  <option value="4">Mom #2</option>
+                  <option value="5">Mom #3</option>
                 </select>
               </div>
               <div class="input-rows">
@@ -48,5 +48,6 @@
       </div>
   </div>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+      <script src="index.js"></script>
 </body>
 </html>
