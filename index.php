@@ -16,8 +16,8 @@
         <div class="row">
           <div class="col-md-6">
             <div id="dad-image-container">
-              <input id="new-dad-image" type="image" src="images/dads&moms/dad2.jpg" />
-              <input id="dad-image" type="image" src="images/dads&moms/dad1.jpg" />
+              <img id="new-dad-image" src="images/dads&moms/dad2.jpg" />
+              <img id="dad-image" src="images/dads&moms/dad1.jpg" />
             </div>
             
           </div>
@@ -30,17 +30,27 @@
                 <div contenteditable="true" id="dad-joke-box"></div>
               </div>
               <div class="input-rows">
-                <div id="input-title">
-                  <strong>Voices</strong>
+                <div class="row">
+                  <div class="col-2">
+                    <input id="sound-button" type="image" src="images/icon_volume.png" />
+                  </div>
+                  <div class="col-10">
+                    <div id="input-title">
+                      <strong>Voices</strong>
+                    </div>
+                    <select id="voices-select">
+                      <option value="0">Henry</option>
+                      <option value="1">Kevin</option>
+                      <option value="2">Michael</option>
+                      <option value="3">Allison</option>
+                      <option value="4">Olivia</option>
+                      <option value="5">Emily</option>
+                    </select>
+                  </div>
+                    
+                  
                 </div>
-                <select id="voices-select">
-                  <option value="0">Henry</option>
-                  <option value="1">Kevin</option>
-                  <option value="2">Michael</option>
-                  <option value="3">Allison</option>
-                  <option value="4">Olivia</option>
-                  <option value="5">Emily</option>
-                </select>
+                
               </div>
               <div class="input-rows">
                 <button class="btn btn-primary save-button">Save</button>
