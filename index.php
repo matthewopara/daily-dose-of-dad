@@ -27,9 +27,7 @@
                 <div id="input-title">
                   <strong>Dad Joke Text</strong>
                 </div>
-                <div contenteditable="true" id="dad-joke-box">
-                  
-                </div>
+                <div contenteditable="true" id="dad-joke-box"></div>
               </div>
               <div class="input-rows">
                 <div id="input-title">
