@@ -13,7 +13,7 @@
     <?php include 'navbar.php'; ?>
 
     <div id="background">
-        <h1 id="saved-jokes">Saved Jokes</h1>
+        <h1 id="saved-jokes"><strong>Saved Jokes</strong></h1>
         
         <div id="list" class="container">
             <div class="row">

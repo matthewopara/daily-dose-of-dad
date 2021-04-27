@@ -13,7 +13,7 @@
     <?php include 'navbar.php'; ?>
 
     <div id="background">
-        <h1 id="sign-up">Login</h1>
+        <h1 id="sign-up"><strong>Login</strong></h1>
         <form id="form">
             <label for="user" class="form-label">Username:</label><br>
             <input type="text" class="form-control" id="user" name="user"></input><br>
@@ -21,7 +21,7 @@
             <label for="pass" class="form-label">Password:</label><br>
             <input type="password" class="form-control" id="pass" name="pass"></input><br>
 
-            <input id="submit-button" type="submit" class="btn btn-primary" name="hello"></input><br>
+            <input id="submit-button" type="submit" class="btn btn-dark" name="hello"></input><br>
         </form>
     </div>
     

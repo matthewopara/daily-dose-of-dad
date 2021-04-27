@@ -53,7 +53,7 @@
                 
               </div>
               <div class="input-rows">
-                <button class="btn btn-primary save-button">Save</button>
+                <button class="btn btn-dark save-button">Save</button>
               </div>
             </div>
               
