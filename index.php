@@ -14,14 +14,14 @@
       <?php include 'navbar.php'; ?>
       <div class="content container">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-lg-6">
             <div id="dad-image-container">
               <img id="new-dad-image" src="images/dads&moms/dad2.jpg" />
               <img id="dad-image" src="images/dads&moms/dad1.jpg" />
             </div>
             
           </div>
-          <div class="col-md-6">
+          <div class="col-lg-6">
             <div id="stuff">
               <div class="input-rows">
                 <div id="input-title">
