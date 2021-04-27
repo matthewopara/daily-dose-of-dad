@@ -11,6 +11,16 @@ voiceSelector.onchange = function() {
     dadImageInterval = setInterval(fadeDadImage, 1);
 }
 
+let dadJokeBox = document.querySelector("#dad-joke-box");
+dadJokeBox.addEventListener("keyup", function(event) {
+    console.log(dadJokeBox.innerHTML.length);
+    if (dadJokeBox.innerHTML.length > 300) {
+        document.querySelector("#max-char-error").classList.remove("hidden");
+    } else {
+        document.querySelector("#max-char-error").classList.add("hidden");
+    }
+});
+
 
 function fadeDadImage() {
     let opacity = dadImage.style.opacity;

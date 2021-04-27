@@ -28,6 +28,7 @@
                   <strong>Dad Joke Text</strong>
                 </div>
                 <div contenteditable="true" id="dad-joke-box"></div>
+                <div class="error hidden" id="max-char-error">Max 300 characters</div>
               </div>
               <div class="input-rows">
                 <div class="row">
