@@ -1,5 +1,5 @@
 let voiceSelector = document.querySelector("#voices-select");
-let dadImages = ["images/dads&moms/dad1.jpg", "images/dads&moms/dad2.jpg", "images/dads&moms/dad3.jpg", "images/dads&moms/mom1.jpg", "images/dads&moms/mom2.jpg", "images/dads&moms/mom3.jpg"]
+let dadImages = ["images/dads&moms/mufasa.jpg", "images/dads&moms/homer.jpg", "images/dads&moms/mr_incredible.jpg", "images/dads&moms/elastigirl.jpg", "images/dads&moms/sarabi.jpg", "images/dads&moms/marge.jpg"]
 let dadImage = document.querySelector("#dad-image");
 dadImage.style.opacity = 1;;
 let dadImageInterval = null;

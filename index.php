@@ -16,8 +16,8 @@
         <div class="row">
           <div class="col-lg-6">
             <div id="dad-image-container">
-              <img id="new-dad-image" src="images/dads&moms/dad2.jpg" />
-              <img id="dad-image" src="images/dads&moms/dad1.jpg" />
+              <img id="new-dad-image" src="images/dads&moms/mufasa.jpg" />
+              <img id="dad-image" src="images/dads&moms/mufasa.jpg" />
             </div>
             
           </div>
@@ -40,12 +40,12 @@
                       <strong>Voices</strong>
                     </div>
                     <select id="voices-select">
-                      <option value="0">Henry</option>
-                      <option value="1">Kevin</option>
-                      <option value="2">Michael</option>
-                      <option value="3">Allison</option>
-                      <option value="4">Olivia</option>
-                      <option value="5">Emily</option>
+                      <option value="0">Mufasa</option> <!--henry-->
+                      <option value="1">Homer</option> <!--michael-->
+                      <option value="2">Mr. Incredible</option> <!--kevin-->
+                      <option value="3">Elastigirl</option> <!--olivia-->
+                      <option value="4">Sarabi</option> <!--lisa-->
+                      <option value="5">Marge</option> <!--emily-->
                     </select>
                   </div>
                     
