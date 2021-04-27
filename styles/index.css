@@ -2,6 +2,10 @@
     margin-top: 20px;
 }
 
+#input-title {
+    font-size: larger;
+}
+
 #dad-joke-box {
     border: 1px solid black;
     min-height: 50px;
@@ -17,11 +21,19 @@
 }
 
 #dad-image-container {
+    position: relative;
     margin: auto;
     width: 80%;
 }
 
 #dad-image {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#new-dad-image {
     width: 100%;
 }
 

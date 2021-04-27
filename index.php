@@ -14,28 +14,34 @@
       <?php include 'navbar.php'; ?>
       <div class="content container">
         <div class="row">
-          <div class="col-12 col-md-6">
+          <div class="col-md-6">
             <div id="dad-image-container">
+              <input id="new-dad-image" type="image" src="images/dads&moms/dad2.jpg" />
               <input id="dad-image" type="image" src="images/dads&moms/dad1.jpg" />
             </div>
+            
           </div>
-          <div class="col">
+          <div class="col-md-6">
             <div id="stuff">
               <div class="input-rows">
-                Dad Joke Text
+                <div id="input-title">
+                  <strong>Dad Joke Text</strong>
+                </div>
                 <div id="dad-joke-box">
                   
                 </div>
               </div>
               <div class="input-rows">
-                Voices
+                <div id="input-title">
+                  <strong>Voices</strong>
+                </div>
                 <select id="voices-select">
-                  <option value="0">Dad #1</option>
-                  <option value="1">Dad #2</option>
-                  <option value="2">Dad #3</option>
-                  <option value="3">Mom #1</option>
-                  <option value="4">Mom #2</option>
-                  <option value="5">Mom #3</option>
+                  <option value="0">Henry</option>
+                  <option value="1">Kevin</option>
+                  <option value="2">Michael</option>
+                  <option value="3">Allison</option>
+                  <option value="4">Olivia</option>
+                  <option value="5">Emily</option>
                 </select>
               </div>
               <div class="input-rows">
