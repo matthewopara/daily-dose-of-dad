@@ -6,15 +6,15 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="index.php">Dad Jokes</a>
-        <a class="nav-link" href="saved_jokes.php">Saved Jokes</a>
+        <a class="nav-link dest" href="index.php">Dad Jokes</a>
+        <a class="nav-link dest" href="saved_jokes.php">Saved Jokes</a>
         <div class="dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Account
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <li><a class="dropdown-item" href="login.php">Login</a></li>
-              <li><a class="dropdown-item" href="sign_up.php">Sign Up</a></li>
+              <li><a class="dropdown-item dest" href="login.php">Login</a></li>
+              <li><a class="dropdown-item dest" href="sign_up.php">Sign Up</a></li>
             </ul>
         </div>
       </div>
