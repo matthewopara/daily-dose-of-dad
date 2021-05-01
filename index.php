@@ -53,17 +53,23 @@
                 </div>
                 
               </div>
-              <div class="input-rows">
-                <button class="btn btn-dark save-button">Save</button>
+              <div class="row input-rows">
+                <div class="col">
+                  <button id="generate-button" class="btn btn-dark new-button">Generate</button>
+                </div>
+                <div class="col">
+                  <button class="btn btn-success new-button">Save</button>
+                </div>
               </div>
-            </div>
-              
+            </div>  
           </div>
         </div>
       </div>
   </div>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+      
       <script src="scripts/index.js"></script>
       <script src="scripts/navbar.js"></script>
+      <script src="scripts/dadjokeapi.js"></script>
 </body>
 </html>
