@@ -10,7 +10,7 @@ generateBtn.onclick = function() {
     httpRequest.onreadystatechange = function() {
         console.log(httpRequest.readyState)
 
-        // readyState == 4 when we have a full response from iTunes
+        // readyState == 4 when we have a full response
         if (httpRequest.readyState == 4) {
             // check for errors
             if (httpRequest.status == 200) {
