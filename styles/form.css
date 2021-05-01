@@ -13,6 +13,14 @@ input[type=submit] {
     display: block;
 }
 
+.invalid {
+    color: red;
+}
+
+.hidden {
+    display: none;
+}
+
 @media (max-width: 767px) {
     #form {
         margin-left: 10%;
