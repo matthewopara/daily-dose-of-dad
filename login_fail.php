@@ -14,6 +14,7 @@
 
     <div id="background">
         <h1 id="sign-up"><strong>Login</strong></h1>
+        <h4 style="text-align: center;" class="invalid">Incorrect username or password</h4>
         <form id="form" action="login_confirmation.php" method="POST">
             <label for="user" class="form-label">Username:</label><br>
             <input type="text" class="form-control" id="user" name="user"></input>
