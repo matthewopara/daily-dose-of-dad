@@ -14,34 +14,23 @@
 
         $password = hash("sha256", $_POST["pass"]);
 
-        $sql_match = "SELECT * FROM users
-        WHERE username = '" . $_POST["user"] . "' AND password = '" . $password . "'";
-
-
-        // $results_match = $mysqli->query($sql_match);
-        // if (!$results_match) {
-        //     echo $mysqli->error;
-        //     exit();
-        // }
-
         $statement = $mysqli->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
         $statement->bind_param("ss", $_POST["user"], $password);
         $executed = $statement->execute();
 		if (!$executed) {
 			echo $mysqli->error;
 		}
-        var_dump($executed);
 
-        // if ($results_match->num_rows == 1) {
-        //     session_start();
-        //     $_SESSION["loggedIn"] = true;
-        //     $_SESSION["username"] = $_POST["user"];
-        //     header("Location: index.php");
-        //     exit();
-        // } else {
-        //     header("Location: login_fail.php");
-        //     exit();
-        // }
+        if ($statement->get_result()->num_rows == 1) {
+            session_start();
+            $_SESSION["loggedIn"] = true;
+            $_SESSION["username"] = $_POST["user"];
+            header("Location: index.php");
+            exit();
+        } else {
+            header("Location: login_fail.php");
+            exit();
+        }
     }
 
     $mysqli->close();
