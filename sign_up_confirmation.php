@@ -20,35 +20,25 @@
             exit();
         }
 
-        $sql_registered = "SELECT * FROM users
-        WHERE username = '" . $_POST["user"] . "'";
-        // echo "<hr>" . $sql_registered . "<hr>";
-
-        $results_registered = $mysqli->query($sql_registered);
-        if (!$results_registered) {
+        $statement = $mysqli->prepare("SELECT * FROM users WHERE username = ?");
+        $statement->bind_param("s", $_POST["user"]);
+        $executed = $statement->execute();
+        if (!$executed) {
             echo $mysqli->error;
-            exit();
         }
 
-        // var_dump($results_registered);
-
-        if ($results_registered->num_rows > 0) {
+        if ($statement->get_result()->num_rows > 0) {
             $bigMsg = "Sign Up Unsuccessful";
 	        $smallMsg = "Username is already taken. Please try again.";
             $hasError = true;
         } else {
-            // Hash the password before storing it into the db
             $password = hash("sha256", $_POST["pass"]);
-            // var_dump($password);
-    
-            // Write SQL to insert this new user into the users table
-            $sql = "INSERT INTO users(username, password) VALUES('" . $_POST["user"] . "','" . $password . "');";
-            // echo "<hr>" . $sql . "<hr>";
-    
-            $results = $mysqli->query($sql);
-            if (!$results) {
+            
+            $statement = $mysqli->prepare("INSERT INTO users(username, password) VALUES (?, ?)");
+            $statement->bind_param("ss", $_POST["user"], $password);
+            $executed = $statement->execute();
+            if (!$executed) {
                 echo $mysqli->error;
-                exit();
             }
         }
     }
