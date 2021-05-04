@@ -53,6 +53,8 @@
         }
     }
 
+    $mysqli->close();
+
 ?>
 
 <!DOCTYPE html>
