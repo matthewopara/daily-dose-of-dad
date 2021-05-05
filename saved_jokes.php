@@ -50,7 +50,7 @@
                             <div class="col-1 col-sm-2 col-xl-1">
                                 <input class="sound-button" type="image" src="images/icon_volume.png" data-voice=<?php echo $row["voices_id"];?> />
                             </div>
-                            <div class="col">
+                            <div class="col joke-text">
                                 <?php echo $row["joke"]?>
                             </div>
                         </div>
@@ -63,5 +63,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <script src="scripts/navbar.js"></script>
+    <script src="scripts/saved_jokes.js"></script>
 </body>
 </html>
