@@ -1,3 +1,30 @@
+<?php
+    require 'config/config.php';
+    session_start();
+
+    if (!isset($_SESSION["loggedIn"]) || empty($_SESSION["loggedIn"]) || !$_SESSION["loggedIn"]) {
+        header("Location: index.php?loggedIn=false");
+        exit();
+    } else {
+        $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+        if ($mysqli->connect_errno) {
+            echo $mysqli->connect_error;
+            exit();
+        }
+
+        $statement = $mysqli->prepare("SELECT joke, voices_id FROM saved_jokes WHERE users_id = ?");
+        $statement->bind_param("i", $_SESSION["userId"]);
+        $executed = $statement->execute();
+        if (!$executed) {
+            echo $mysqli->error;
+        }
+
+        $results = $statement->get_result();
+        $mysqli->close();
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,66 +44,18 @@
         
         <div id="list" class="container">
             <div class="row">
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="row">
-                        <div class="col-1 col-sm-2 col-xl-1">
-                            <input class="sound-button" type="image" src="images/icon_volume.png" />
-                        </div>
-                        <div class="col">
-                            Have you heard about the chocolate record player? It sounds pretty sweet.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="row">
-                        <div class="col-1 col-sm-2 col-xl-1">
-                            <input class="sound-button" type="image" src="images/icon_volume.png" />
-                        </div>
-                        <div class="col">
-                            Have you heard about the chocolate record player? It sounds pretty sweet.
+                <?php while ($row = $results->fetch_assoc()) : ?>
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <div class="row">
+                            <div class="col-1 col-sm-2 col-xl-1">
+                                <input class="sound-button" type="image" src="images/icon_volume.png" data-voice=<?php echo $row["voices_id"];?> />
+                            </div>
+                            <div class="col">
+                                <?php echo $row["joke"]?>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="row">
-                        <div class="col-1 col-sm-2 col-xl-1">
-                            <input class="sound-button" type="image" src="images/icon_volume.png" />
-                        </div>
-                        <div class="col">
-                            Have you heard about the chocolate record player? It sounds pretty sweet.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="row">
-                        <div class="col-1 col-sm-2 col-xl-1">
-                            <input class="sound-button" type="image" src="images/icon_volume.png" />
-                        </div>
-                        <div class="col">
-                            Have you heard about the chocolate record player? It sounds pretty sweet.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="row">
-                        <div class="col-1 col-sm-2 col-xl-1">
-                            <input class="sound-button" type="image" src="images/icon_volume.png" />
-                        </div>
-                        <div class="col">
-                            Have you heard about the chocolate record player? It sounds pretty sweet.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4">
-                    <div class="row">
-                        <div class="col-1 col-sm-2 col-xl-1">
-                            <input class="sound-button" type="image" src="images/icon_volume.png" />
-                        </div>
-                        <div class="col">
-                            Have you heard about the chocolate record player? It sounds pretty sweet.
-                        </div>
-                    </div>
-                </div>
+                <?php endwhile; ?>
             </div>
         </div>
     </div>

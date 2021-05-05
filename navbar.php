@@ -1,5 +1,7 @@
 <?php
-  session_start();
+  if (session_status() != 2) {
+    session_start();
+  }
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #bad7f2;">

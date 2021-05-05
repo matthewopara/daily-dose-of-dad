@@ -50,9 +50,8 @@ saveButton.addEventListener("click", function() {
     }
 })
 
-
-if (get("success") == "false" && get("loggedIn") == "false") {
-    alert("You must be logged in to save a joke")
+if (get("loggedIn") == "false") {
+    alert("You are not logged in")
 } else if (get("success") == "false") {
     alert("An error occurred while trying to save the joke")
 } else if (get("success") == "true") {
