@@ -58,10 +58,14 @@
                   <button id="generate-button" class="btn btn-dark new-button">Generate</button>
                 </div>
                 <div class="col">
-                  <button class="btn btn-success new-button">Save</button>
+                  <button id="save-button" class="btn btn-success new-button">Save</button>
                 </div>
               </div>
             </div>  
+            <form id="form" class="hidden" action="save.php" method="POST">
+                <input id="joke-input" type="text" name="joke" value="" />
+                <input id="voice-input" type="text" name="voice-id" value="" />
+            </form>
           </div>
         </div>
       </div>

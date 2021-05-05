@@ -21,10 +21,13 @@
 			echo $mysqli->error;
 		}
 
-        if ($statement->get_result()->num_rows == 1) {
+        $result = $statement->get_result();
+
+        if ($result->num_rows == 1) {
             session_start();
             $_SESSION["loggedIn"] = true;
             $_SESSION["username"] = $_POST["user"];
+            $_SESSION["userId"] = $result->fetch_assoc()["id"];
             header("Location: index.php");
             exit();
         } else {

@@ -49,3 +49,7 @@
     margin-right: auto;
     /* justify-content: center; */
 }
+
+.hidden {
+    display: none;
+}
