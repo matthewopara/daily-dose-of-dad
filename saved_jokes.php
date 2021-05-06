@@ -12,7 +12,7 @@
             exit();
         }
 
-        $statement = $mysqli->prepare("SELECT joke, voices_id FROM saved_jokes WHERE users_id = ?");
+        $statement = $mysqli->prepare("SELECT joke, id AS joke_id, voices_id FROM saved_jokes WHERE users_id = ?");
         $statement->bind_param("i", $_SESSION["userId"]);
         $executed = $statement->execute();
         if (!$executed) {
@@ -48,7 +48,7 @@
                     <div class="col-12 col-sm-6 col-md-4">
                         <div class="row">
                             <div class="col-1 col-sm-2 col-xl-1">
-                                <input class="sound-button" type="image" src="images/icon_volume.png" data-voice=<?php echo $row["voices_id"];?> />
+                                <input class="sound-button" type="image" src="images/icon_volume.png" data-jokeid=<?php echo $row["joke_id"];?> data-voice=<?php echo $row["voices_id"];?> />
                             </div>
                             <div class="col joke-text">
                                 <?php echo $row["joke"]?>

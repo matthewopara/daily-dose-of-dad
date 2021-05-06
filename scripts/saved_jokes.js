@@ -8,8 +8,10 @@ for (let i = 0; i < soundButtons.length; i++) {
         // playDadJokeAudio("Hello")
 
         let httpRequest = new XMLHttpRequest()
-        httpRequest.open("GET", "text_to_speech.php?joke=Funny")
-        // httpRequest.open("GET", "text_to_speech.php?joke=" + encodeURIComponent(jokeText))
+        console.log(soundButton.dataset.voice)
+        console.log(soundButton.dataset.jokeid)
+        // httpRequest.open("GET", "text_to_speech.php?joke=Funny&jokeId=" + soundButton.dataset.jokeid + "&voiceId=" + soundButton.dataset.voice)
+        httpRequest.open("GET", "text_to_speech.php?joke=" + encodeURIComponent(jokeText) +  "&jokeId=" + soundButton.dataset.jokeid + "&voiceId=" + soundButton.dataset.voice)
         httpRequest.send()
 
         httpRequest.onreadystatechange = function() {
@@ -21,6 +23,7 @@ for (let i = 0; i < soundButtons.length; i++) {
                 if (httpRequest.status == 200) {
                     // 200 means successful
                     playAudio(httpRequest.responseText)
+                    // console.log(httpRequest.responseText)
                 } else {
                     console.log("Error")
                     console.log(httpRequest.status)
