@@ -38,8 +38,11 @@
 </head>
 <body>
     <?php include 'navbar.php'; ?>
-
     <div id="background">
+        <div id="save-div" class="hidden">
+            <button id="save" class="btn btn-success">Save</button>
+        </div>
+        
         <h1 id="saved-jokes"><strong>Saved Jokes</strong></h1>
         
         <div id="list" class="container">
@@ -50,7 +53,7 @@
                             <div class="col-1 col-sm-2 col-xl-1">
                                 <input class="sound-button" type="image" src="images/icon_volume.png" data-jokeid=<?php echo $row["joke_id"];?> data-voice=<?php echo $row["voices_id"];?> />
                             </div>
-                            <div class="col joke-text">
+                            <div contenteditable="true" class="col joke-text">
                                 <?php echo $row["joke"]?>
                             </div>
                         </div>
