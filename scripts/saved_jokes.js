@@ -1,12 +1,19 @@
 let jokeTextDivs = document.querySelectorAll(".joke-text")
 let soundButtons = document.querySelectorAll(".sound-button")
 
+let editButton = document.querySelector("#edit")
+let editDiv = document.querySelector("#edit-div")
+let cancelButton = document.querySelector("#cancel")
+let cancelDiv = document.querySelector("#cancel-div")
+
+let deleteButtons = document.querySelectorAll(".delete-button")
+
 for (let i = 0; i < soundButtons.length; i++) {
     let soundButton = soundButtons[i]
-    let jokeText = jokeTextDivs[i].innerText
     soundButton.addEventListener("click", function() {
         // playDadJokeAudio("Hello")
 
+        let jokeText = jokeTextDivs[i].innerText
         let httpRequest = new XMLHttpRequest()
         console.log(soundButton.dataset.voice)
         console.log(soundButton.dataset.jokeid)
@@ -63,7 +70,10 @@ function DadJokeEdit(jokeId, joke) {
     this.joke = joke
 }
 
-document.querySelector("#save-div").addEventListener("click", function() {
+let saveButton = document.querySelector("#save")
+saveButton.addEventListener("click", function() {
+    document.querySelector("#save-div").classList.add("hidden")
+    switchToDefaultMode()
     let changedJokes = []
     for (let i = 0; i < originalJokes.length; i++) {
         if (originalJokes[i].changed) {
@@ -87,6 +97,8 @@ document.querySelector("#save-div").addEventListener("click", function() {
             if (httpRequest.status == 200) {
                 // 200 means successful
                 console.log(httpRequest.responseText)
+
+                // set original jokes array to current jokes
             } else {
                 console.log("Error")
                 console.log(httpRequest.status)
@@ -94,6 +106,95 @@ document.querySelector("#save-div").addEventListener("click", function() {
         }
     }
 })
+
+
+editButton.addEventListener("click", function() {
+
+    switchToEditMode()
+})
+
+cancelButton.addEventListener("click", function() {
+
+    switchToDefaultMode()
+
+    for (let i = 0; i < jokeTextDivs.length; i++) {
+        jokeTextDivs[i].innerText = originalJokes[i].originalJoke
+        originalJokes[i].changed = false
+    }
+})
+
+// function sendEditRequest() {
+//     let changedJokeIds = []
+//     for (let i = 0; i < originalJokes.length; i++) {
+//         if (originalJokes[i].changed) {
+//             changedJokeIds.push(soundButtons[i].dataset.jokeid)
+//             // changedJokes.push(dadJoke)
+//         }
+//     }
+//     let data = JSON.stringify(changedJokeIds)
+//     let editHttpRequest = new XMLHttpRequest()
+//     editHttpRequest.open("POST", "text_to_speech.php")
+//     editHttpRequest.setRequestHeader("Content-Type", "application/json")
+//     editHttpRequest.send(data)
+
+//     editHttpRequest.onreadystatechange = function() {
+//         console.log(httpRequest.readyState)
+
+//         // readyState == 4 when we have a full response
+//         if (editHttpRequest.readyState == 4) {
+//             // check for errors
+//             if (editHttpRequest.status == 200) {
+//                 // 200 means successful
+//                 console.log(editHttpRequest.responseText)
+//             } else {
+//                 console.log("Error")
+//                 console.log(editHttpRequest.status)
+//             }
+//         }
+//     }
+//     return false
+// }
+
+function switchToDefaultMode() {
+    document.querySelector("#save-div").classList.add("hidden")
+    let jokes = document.querySelectorAll(".joke-text")
+    jokes.forEach(jokeDiv => {
+        // jokeDiv.style.borderSize = "5px"
+        jokeDiv.style.border = ""
+        jokeDiv.setAttribute("contenteditable", "false")
+    })
+
+    cancelDiv.classList.add("hidden")
+    editDiv.classList.remove("hidden")
+
+    deleteButtons.forEach(btn => {
+        btn.classList.add("hidden")
+    })
+
+    soundButtons.forEach(btn => {
+        btn.classList.remove("hidden")
+    })
+}
+
+function switchToEditMode() {
+    let jokes = document.querySelectorAll(".joke-text")
+    jokes.forEach(jokeDiv => {
+        // jokeDiv.style.borderSize = "5px"
+        jokeDiv.style.border = "2px solid black"
+        jokeDiv.setAttribute("contenteditable", "true")
+    })
+
+    editDiv.classList.add("hidden")
+    cancelDiv.classList.remove("hidden")
+
+    soundButtons.forEach(btn => {
+        btn.classList.add("hidden")
+    })
+
+    deleteButtons.forEach(btn => {
+        btn.classList.remove("hidden")
+    })
+}
 
 function playAudio(mp3File) {
     let audioObj = new Audio(mp3File)

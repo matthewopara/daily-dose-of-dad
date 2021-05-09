@@ -11,6 +11,10 @@
     width: 25px;
 }
 
+.delete-button {
+    width: 25px;
+}
+
 [class*="col-"] {
     margin-bottom: 30px;
 }
@@ -18,6 +22,24 @@
 #save {
     padding-left: 60px;
     padding-right: 60px;
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+}
+
+#edit {
+    width: 150px;
+    padding-left: 40px;
+    padding-right: 40px;
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+}
+
+#cancel {
+    width: 150px;
+    padding-left: 40px;
+    padding-right: 40px;
     position: fixed;
     bottom: 25px;
     right: 25px;

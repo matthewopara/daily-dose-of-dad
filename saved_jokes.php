@@ -42,6 +42,12 @@
         <div id="save-div" class="hidden">
             <button id="save" class="btn btn-success">Save</button>
         </div>
+        <div id="edit-div">
+            <button id="edit" class="btn btn-dark">Edit</button>
+        </div>
+        <div id="cancel-div" class="hidden">
+            <button id="cancel" class="btn btn-warning">Cancel</button>
+        </div>
         
         <h1 id="saved-jokes"><strong>Saved Jokes</strong></h1>
         
@@ -52,8 +58,9 @@
                         <div class="row">
                             <div class="col-1 col-sm-2 col-xl-1">
                                 <input class="sound-button" type="image" src="images/icon_volume.png" data-jokeid=<?php echo $row["joke_id"];?> data-voice=<?php echo $row["voices_id"];?> />
+                                <input class="delete-button hidden" type="image" src="images/icon_trash.png" data-jokeid=<?php echo $row["joke_id"];?> data-voice=<?php echo $row["voices_id"];?> />
                             </div>
-                            <div contenteditable="true" class="col joke-text">
+                            <div class="col joke-text">
                                 <?php echo $row["joke"]?>
                             </div>
                         </div>
