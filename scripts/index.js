@@ -4,6 +4,7 @@ let dadImage = document.querySelector("#dad-image")
 dadImage.style.opacity = 1
 let dadImageInterval = null
 let newDadImage = document.querySelector("#new-dad-image")
+let soundButton = document.querySelector("#sound-button")
 
 voiceSelector.onchange = function() {
     newDadImage.src = dadImages[parseInt(voiceSelector.value)];
@@ -21,6 +22,45 @@ dadJokeBox.addEventListener("keyup", function(event) {
     }
 });
 
+let lastAudioText = "";
+let lastAudioVoice
+soundButton.addEventListener("click", function() {
+    console.log(dadJokeBox.innerText)
+    console.log(voiceSelector.value)
+    if (dadJokeBox.innerText == "") {
+        return
+    }
+    let newJoke = ""
+    if (lastAudioText.localeCompare(dadJokeBox.innerText) == 0 && lastAudioVoice == voiceSelector.value) {
+        newJoke = "false"
+    } else {
+        newJoke = "true"
+        lastAudioText = dadJokeBox.innerText
+        lastAudioVoice = voiceSelector.value
+    }
+    let httpRequest = new XMLHttpRequest()
+
+    httpRequest.open("GET", "text_to_speech.php?joke=" + encodeURIComponent(dadJokeBox.innerText) +  "&jokeId=-1&voiceId=" + voiceSelector.value + "&new=" + newJoke)
+    httpRequest.send()
+
+    httpRequest.onreadystatechange = function() {
+        console.log(httpRequest.readyState)
+
+        // readyState == 4 when we have a full response
+        if (httpRequest.readyState == 4) {
+            // check for errors
+            if (httpRequest.status == 200) {
+                // 200 means successful
+                console.log(httpRequest.responseText)
+                playAudio(httpRequest.responseText)
+            } else {
+                console.log("Error")
+                console.log(httpRequest.status)
+            }
+        }
+    }
+    return false
+})
 
 function fadeDadImage() {
     let opacity = dadImage.style.opacity
@@ -61,4 +101,9 @@ if (get("loggedIn") == "false") {
 function get(name){
     if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
        return decodeURIComponent(name[1]);
- }
+}
+
+ function playAudio(mp3File) {
+    let audioObj = new Audio(mp3File)
+    audioObj.play()
+}

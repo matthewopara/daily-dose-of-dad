@@ -16,10 +16,25 @@
 
     $filename = "jokemp3s/joke" . $jokeId . ".mp3";
 
-    if (file_exists($filename)) {
+    if ($jokeId == "-1") {
+        if (!isset($_GET["new"]) || empty($_GET["new"]) || $_GET["new"] != "true") {
+            echo getPresavedJokeMP3();
+        } else {
+            $presaved = getPresavedJokeMP3();
+            if ($presaved != "0") {
+                unlink($presaved);
+            }
+            $filename = "jokemp3s/joke-" . time() . ".mp3";
+            createMP3($filename, $joke, $voices[$voiceId]);
+        }
+    } else if (file_exists($filename)) {
         echo $filename;
     } else {
-        $url = ENDPOINT . "?voice=" . $voices[$voiceId];
+        createMP3($filename, $joke, $voices[$voiceId]);
+    }
+
+    function createMP3($file, $joke, $voice) {
+        $url = ENDPOINT . "?voice=" . $voice;
 
         $curl = curl_init($url);
 
@@ -49,10 +64,20 @@
         if (count($jokemp3s) - 2 >= 30) {
             unlink("jokemp3s/" . $jokemp3s[2]);
         } 
-        $myfile = fopen($filename, "w");
+        $myfile = fopen($file, "w");
         fwrite($myfile, $resp);
         fclose($myfile);
-        echo $filename;
+        echo $file;
+    }
+
+    function getPresavedJokeMP3() {
+        $jokemp3s = scandir("jokemp3s");
+        for ($i=0; $i < count($jokemp3s); $i++) { 
+            if (substr($jokemp3s[$i], 4, 1) == '-') {
+                return "jokemp3s/" . $jokemp3s[$i];
+            }
+        }
+        return "0";
     }
 
     
