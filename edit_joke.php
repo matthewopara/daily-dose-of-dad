@@ -24,14 +24,21 @@
             echo $mysqli->error;
         }
 
-        $filename = "jokemp3s/joke" . $jokeId . ".mp3";
+        $jokeMp3 = getJokeMp3($jokeId);
+        if ($jokeMp3 != "0") {
+            unlink($jokeMp3);
+        }
+    }
+
+    function getJokeMp3($jokeId) {
         $jokemp3s = scandir("jokemp3s");
-        for ($i=0; $i < count($jokemp3s); $i++) { 
-            if (in_array("joke" . $jokeId . ".mp3", $jokemp3s)) {
-                unlink($filename);
-                break;
+        $substring = "joke" . $jokeId . "v=";
+        for ($i=0; $i < count($jokemp3s); $i++) {
+            if (strpos($jokemp3s[$i], $substring) !== false) {
+                return "jokemp3s/" . $jokemp3s[$i];
             }
         }
+        return "0";
     }
 
     $mysqli->close();

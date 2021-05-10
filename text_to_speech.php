@@ -14,6 +14,7 @@
     $jokeId = $_GET["jokeId"];
     $voiceId = $_GET["voiceId"];
 
+    $filePrefix = "jokemp3s/joke" . $jokeId;
     $filename = "jokemp3s/joke" . $jokeId . ".mp3";
 
     if ($jokeId == "-1") {
@@ -27,10 +28,11 @@
             $filename = "jokemp3s/joke-" . time() . ".mp3";
             createMP3($filename, $joke, $voices[$voiceId]);
         }
-    } else if (file_exists($filename)) {
-        echo $filename;
+    } else if (getJokeMp3($jokeId) != "0") {
+        echo getJokeMp3($jokeId);
     } else {
-        createMP3($filename, $joke, $voices[$voiceId]);
+        $file = $filePrefix . "v=" . time() . ".mp3";
+        createMP3($file, $joke, $voices[$voiceId]);
     }
 
     function createMP3($file, $joke, $voice) {
@@ -74,6 +76,18 @@
         $jokemp3s = scandir("jokemp3s");
         for ($i=0; $i < count($jokemp3s); $i++) { 
             if (substr($jokemp3s[$i], 4, 1) == '-') {
+                return "jokemp3s/" . $jokemp3s[$i];
+            }
+        }
+        return "0";
+    }
+
+    function getJokeMp3($jokeId) {
+        $jokemp3s = scandir("jokemp3s");
+        $substring = "joke" . $jokeId . "v=";
+        for ($i=0; $i < count($jokemp3s); $i++) {
+            // $vPos = strpos($jokemp3s[$i], 'v')
+            if (strpos($jokemp3s[$i], $substring) !== false) {
                 return "jokemp3s/" . $jokemp3s[$i];
             }
         }

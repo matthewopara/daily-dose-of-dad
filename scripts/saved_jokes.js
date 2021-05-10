@@ -104,7 +104,7 @@ function setUp() {
                     if (httpRequest.status == 200) {
                         // 200 means successful
                         playAudio(httpRequest.responseText)
-                        // console.log(httpRequest.responseText)
+                        console.log(httpRequest.responseText)
                     } else {
                         console.log("Error")
                         console.log(httpRequest.status)
@@ -156,6 +156,7 @@ function setUp() {
                             // 200 means successful
                             console.log(deleteRequest.responseText)
                             if (deleteRequest.responseText == "1") {
+                                removeUnsavedEdits()
                                 switchToDefaultMode()
                                 document.querySelector("#container-row").removeChild(jokeInfos[i])
                                 resetJokeArrays()
