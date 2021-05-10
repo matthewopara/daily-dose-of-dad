@@ -52,9 +52,9 @@
         <h1 id="saved-jokes"><strong>Saved Jokes</strong></h1>
         
         <div id="list" class="container">
-            <div class="row">
+            <div id="container-row" class="row">
                 <?php while ($row = $results->fetch_assoc()) : ?>
-                    <div class="col-12 col-sm-6 col-md-4">
+                    <div class="joke-info col-12 col-sm-6 col-md-4">
                         <div class="row">
                             <div class="col-1 col-sm-2 col-xl-1">
                                 <input class="sound-button" type="image" src="images/icon_volume.png" data-jokeid=<?php echo $row["joke_id"];?> data-voice=<?php echo $row["voices_id"];?> />
