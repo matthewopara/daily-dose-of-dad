@@ -47,7 +47,6 @@ saveButton.addEventListener("click", function() {
     httpRequest.send(data)
 
     httpRequest.onreadystatechange = function() {
-        console.log(httpRequest.readyState)
 
         // readyState == 4 when we have a full response
         if (httpRequest.readyState == 4) {
@@ -55,7 +54,6 @@ saveButton.addEventListener("click", function() {
             if (httpRequest.status == 200) {
                 // 200 means successful
                 alert("Edits were saved")
-                // console.log(httpRequest.responseText)
 
                 // set original jokes array to current jokes
             } else {
@@ -89,14 +87,12 @@ function setUp() {
             shakeInterval = setInterval(shake, 10, soundButtons[i])
             let jokeText = jokeTextDivs[i].innerText
             let httpRequest = new XMLHttpRequest()
-            console.log(soundButton.dataset.voice)
-            console.log(soundButton.dataset.jokeid)
             // httpRequest.open("GET", "text_to_speech.php?joke=Funny&jokeId=" + soundButton.dataset.jokeid + "&voiceId=" + soundButton.dataset.voice)
             httpRequest.open("GET", "text_to_speech.php?joke=" + encodeURIComponent(jokeText) +  "&jokeId=" + soundButton.dataset.jokeid + "&voiceId=" + soundButton.dataset.voice)
             httpRequest.send()
     
             httpRequest.onreadystatechange = function() {
-                console.log(httpRequest.readyState)
+                // console.log(httpRequest.readyState)
         
                 // readyState == 4 when we have a full response
                 if (httpRequest.readyState == 4) {
@@ -104,7 +100,6 @@ function setUp() {
                     if (httpRequest.status == 200) {
                         // 200 means successful
                         playAudio(httpRequest.responseText)
-                        // console.log(httpRequest.responseText)
                     } else {
                         console.log("Error")
                         console.log(httpRequest.status)
@@ -134,7 +129,6 @@ function setUp() {
     }
 
     for (let i = 0; i < deleteButtons.length; i++) {
-        console.log("Button")
         deleteButtons[i].onclick = function() {
             if (confirm("Are you sure you want to delete this joke?")) {
                 let deleteRequest = new XMLHttpRequest()
@@ -147,14 +141,13 @@ function setUp() {
                 deleteRequest.send(JSON.stringify(data))
     
                 deleteRequest.onreadystatechange = function() {
-                    console.log(deleteRequest.readyState)
+                    // console.log(deleteRequest.readyState)
     
                     // readyState == 4 when we have a full response
                     if (deleteRequest.readyState == 4) {
                         // check for errors
                         if (deleteRequest.status == 200) {
                             // 200 means successful
-                            console.log(deleteRequest.responseText)
                             if (deleteRequest.responseText == "1") {
                                 removeUnsavedEdits()
                                 switchToDefaultMode()

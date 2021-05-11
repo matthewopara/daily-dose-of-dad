@@ -13,7 +13,6 @@
     }
 
     for ($i = 0; $i < count($data); $i++) {
-        // var_dump($data[$i]);
         $newJoke = $data[$i]->joke;
         $jokeId = $data[$i]->jokeId;
 

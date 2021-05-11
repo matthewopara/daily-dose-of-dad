@@ -8,7 +8,7 @@ generateBtn.onclick = function() {
     httpRequest.send()
 
     httpRequest.onreadystatechange = function() {
-        console.log(httpRequest.readyState)
+        // console.log(httpRequest.readyState)
 
         // readyState == 4 when we have a full response
         if (httpRequest.readyState == 4) {

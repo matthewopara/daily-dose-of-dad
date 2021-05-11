@@ -14,7 +14,6 @@ voiceSelector.onchange = function() {
 
 let dadJokeBox = document.querySelector("#dad-joke-box")
 dadJokeBox.addEventListener("keyup", function(event) {
-    console.log(dadJokeBox.innerHTML.length)
     if (dadJokeBox.innerHTML.length > 300) {
         document.querySelector("#max-char-error").classList.remove("hidden")
     } else {
@@ -28,8 +27,6 @@ let shakeInterval = null
 soundButton.addEventListener("click", function() {
     // let rotation = currentRotation +
     shakeInterval = setInterval(shake, 10)
-    console.log(dadJokeBox.innerText)
-    console.log(voiceSelector.value)
     if (dadJokeBox.innerText == "") {
         return
     }
@@ -47,14 +44,13 @@ soundButton.addEventListener("click", function() {
     httpRequest.send()
 
     httpRequest.onreadystatechange = function() {
-        console.log(httpRequest.readyState)
+        // console.log(httpRequest.readyState)
 
         // readyState == 4 when we have a full response
         if (httpRequest.readyState == 4) {
             // check for errors
             if (httpRequest.status == 200) {
                 // 200 means successful
-                console.log(httpRequest.responseText)
                 playAudio(httpRequest.responseText)
             } else {
                 console.log("Error")
@@ -127,7 +123,7 @@ saveButton.addEventListener("click", function() {
         httpRequest.send(data)
 
         httpRequest.onreadystatechange = function() {
-            console.log(httpRequest.readyState)
+            // console.log(httpRequest.readyState)
 
             // readyState == 4 when we have a full response
             if (httpRequest.readyState == 4) {
@@ -142,7 +138,6 @@ saveButton.addEventListener("click", function() {
                     } else {
                         alert("An error occurred while trying to save the joke")
                     }
-                    // console.log(httpRequest.responseText)
                     // set original jokes array to current jokes
                 } else {
                     console.log("Error")
