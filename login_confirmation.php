@@ -1,24 +1,30 @@
 <?php
     require 'config/config.php';
 
-    if (!isset($_POST['user']) || empty($_POST['user'])
-	|| !isset($_POST['pass']) || empty($_POST['pass'])) {
-        header("Location: login.php");
+    $data = file_get_contents("php://input");
+    $data = json_decode($data);
+
+    if ($data == NULL) {
+        $data = new class {
+            public $error = true;
+            public $message = "No username or password given. Please try again";
+        };
+        $response = json_encode($data);
+        echo $response;
         exit();
     } else {
         $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
         if ($mysqli->connect_errno) {
-            echo $mysqli->connect_error;
-            exit();
+            unknownError();
         }
 
-        $password = hash("sha256", $_POST["pass"]);
+        $password = hash("sha256", $data->pass);
 
         $statement = $mysqli->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
-        $statement->bind_param("ss", $_POST["user"], $password);
+        $statement->bind_param("ss", $data->user, $password);
         $executed = $statement->execute();
 		if (!$executed) {
-			echo $mysqli->error;
+			unknownError();
 		}
 
         $result = $statement->get_result();
@@ -26,15 +32,37 @@
         if ($result->num_rows == 1) {
             session_start();
             $_SESSION["loggedIn"] = true;
-            $_SESSION["username"] = $_POST["user"];
+            $_SESSION["username"] = $data->user;
             $_SESSION["userId"] = $result->fetch_assoc()["id"];
-            header("Location: index.php");
+            
+            $data = new class {
+                public $error = false;
+                public $message = "Logged in successfully";
+            };
+            $response = json_encode($data);
+            echo $response;
             exit();
         } else {
-            header("Location: login_fail.php");
+            $data = new class {
+                public $error = true;
+                public $message = "Incorrect username or password";
+            };
+            $response = json_encode($data);
+            echo $response;
             exit();
         }
     }
 
     $mysqli->close();
+
+    
+    function unknownError() {
+        $data = new class {
+            public $error = true;
+            public $message = "Something went wrong";
+        };
+        $response = json_encode($data);
+        echo $response;
+        exit();
+    }
 ?>

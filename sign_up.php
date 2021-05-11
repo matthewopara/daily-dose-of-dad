@@ -26,11 +26,11 @@
             <label for="confirm-pass" class="form-label">Confirm Password:</label><br>
             <input type="password" class="form-control" id="confirm-pass"></input>
             <small id="confirm-pass-error" class="invalid hidden">Passwords Don't Match</small><br>
-            
         </form>
+        
         <div id="submit-div">
-                <button id="submit-button" class="btn btn-dark">Submit</button>
-            </div>
+            <button id="submit-button" class="btn btn-dark">Submit</button>
+        </div>
     </div>
     
 
