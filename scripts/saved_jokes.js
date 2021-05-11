@@ -55,7 +55,7 @@ saveButton.addEventListener("click", function() {
             if (httpRequest.status == 200) {
                 // 200 means successful
                 alert("Edits were saved")
-                console.log(httpRequest.responseText)
+                // console.log(httpRequest.responseText)
 
                 // set original jokes array to current jokes
             } else {
@@ -86,7 +86,7 @@ function setUp() {
         let soundButton = soundButtons[i]
         soundButton.onclick = function() {
             // playDadJokeAudio("Hello")
-    
+            shakeInterval = setInterval(shake, 10, soundButtons[i])
             let jokeText = jokeTextDivs[i].innerText
             let httpRequest = new XMLHttpRequest()
             console.log(soundButton.dataset.voice)
@@ -104,7 +104,7 @@ function setUp() {
                     if (httpRequest.status == 200) {
                         // 200 means successful
                         playAudio(httpRequest.responseText)
-                        console.log(httpRequest.responseText)
+                        // console.log(httpRequest.responseText)
                     } else {
                         console.log("Error")
                         console.log(httpRequest.status)
@@ -175,6 +175,37 @@ function setUp() {
                 }
             }
         }
+    }
+}
+
+let iteration = 0
+let increasing = true
+let currentRotation = 0
+function shake(soundBtn) {
+    soundBtn.disabled = true
+    if (iteration == 7) {
+        clearInterval(shakeInterval)
+        soundBtn.style.transform = "rotate(0deg)"
+        iteration = 0
+        increasing = true
+        currentRotation = 0
+        soundBtn.disabled = false
+    } else {
+        if (increasing && currentRotation == 20) {
+            increasing = false
+        } else if (!increasing && currentRotation == 0) {
+            increasing = true
+            iteration++
+        }
+
+        if (increasing) {
+            currentRotation += 10
+        } else {
+            currentRotation -= 10
+        }
+        
+        let rotate = iteration % 2 == 0 ? -currentRotation : currentRotation
+        soundBtn.style.transform = "rotate(" + rotate + "deg)"
     }
 }
 

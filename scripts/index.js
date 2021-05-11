@@ -4,7 +4,7 @@ let dadImage = document.querySelector("#dad-image")
 dadImage.style.opacity = 1
 let dadImageInterval = null
 let newDadImage = document.querySelector("#new-dad-image")
-let soundButton = document.querySelector("#sound-button")
+let soundButton = document.querySelectorAll(".sound-button")[0]
 
 voiceSelector.onchange = function() {
     newDadImage.src = dadImages[parseInt(voiceSelector.value)];
@@ -24,7 +24,10 @@ dadJokeBox.addEventListener("keyup", function(event) {
 
 let lastAudioText = "";
 let lastAudioVoice
+let shakeInterval = null
 soundButton.addEventListener("click", function() {
+    // let rotation = currentRotation +
+    shakeInterval = setInterval(shake, 10)
     console.log(dadJokeBox.innerText)
     console.log(voiceSelector.value)
     if (dadJokeBox.innerText == "") {
@@ -62,6 +65,37 @@ soundButton.addEventListener("click", function() {
     return false
 })
 
+let iteration = 0
+let increasing = true
+let currentRotation = 0
+function shake() {
+    soundButton.disabled = true
+    if (iteration == 7) {
+        clearInterval(shakeInterval)
+        soundButton.style.transform = "rotate(0deg)"
+        iteration = 0
+        increasing = true
+        currentRotation = 0
+        soundButton.disabled = false
+    } else {
+        if (increasing && currentRotation == 20) {
+            increasing = false
+        } else if (!increasing && currentRotation == 0) {
+            increasing = true
+            iteration++
+        }
+
+        if (increasing) {
+            currentRotation += 10
+        } else {
+            currentRotation -= 10
+        }
+        
+        let rotate = iteration % 2 == 0 ? -currentRotation : currentRotation
+        soundButton.style.transform = "rotate(" + rotate + "deg)"
+    }
+}
+
 function fadeDadImage() {
     let opacity = dadImage.style.opacity
     if (opacity <= 0) {
@@ -82,26 +116,62 @@ saveButton.addEventListener("click", function() {
     if (dadJokeBox.innerText.trim().length == 0) {
         alert("There is no joke to save")
     } else {
-        let jokeInput = document.querySelector("#joke-input")
-        let voiceInput = document.querySelector("#voice-input")
-        jokeInput.value = dadJokeBox.innerText.trim()
-        voiceInput.value = voiceSelector.value
-        form.submit()
+        let data = {
+            joke: dadJokeBox.innerText.trim(),
+            voiceId: voiceSelector.value
+        }
+        data = JSON.stringify(data)
+        let httpRequest = new XMLHttpRequest()
+        httpRequest.open("POST", "save.php")
+        httpRequest.setRequestHeader("Content-Type", "application/json")
+        httpRequest.send(data)
+
+        httpRequest.onreadystatechange = function() {
+            console.log(httpRequest.readyState)
+
+            // readyState == 4 when we have a full response
+            if (httpRequest.readyState == 4) {
+                // check for errors
+                if (httpRequest.status == 200) {
+                    // 200 means successful
+                    // alert("Edits were saved")
+                    if (httpRequest.responseText == "0") {
+                        alert("You are not logged in")
+                    } else if (httpRequest.responseText == "2") {
+                        alert("Joke was saved")
+                    } else {
+                        alert("An error occurred while trying to save the joke")
+                    }
+                    // console.log(httpRequest.responseText)
+                    // set original jokes array to current jokes
+                } else {
+                    console.log("Error")
+                    console.log(httpRequest.status)
+                }
+            }
+        }
+
+
+        // let jokeInput = document.querySelector("#joke-input")
+        // let voiceInput = document.querySelector("#voice-input")
+        // jokeInput.value = dadJokeBox.innerText.trim()
+        // voiceInput.value = voiceSelector.value
+        // form.submit()
     }
 })
 
-if (get("loggedIn") == "false") {
-    alert("You are not logged in")
-} else if (get("success") == "false") {
-    alert("An error occurred while trying to save the joke")
-} else if (get("success") == "true") {
-    alert("Joke was saved")
-}
+// if (get("loggedIn") == "false") {
+//     alert("You are not logged in")
+// } else if (get("success") == "false") {
+//     alert("An error occurred while trying to save the joke")
+// } else if (get("success") == "true") {
+//     alert("Joke was saved")
+// }
 
-function get(name){
-    if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
-       return decodeURIComponent(name[1]);
-}
+// function get(name){
+//     if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+//        return decodeURIComponent(name[1]);
+// }
 
  function playAudio(mp3File) {
     let audioObj = new Audio(mp3File)

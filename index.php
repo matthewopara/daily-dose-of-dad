@@ -34,7 +34,7 @@
               <div class="input-rows">
                 <div class="row">
                   <div class="col-2">
-                    <input id="sound-button" type="image" src="images/icon_volume.png" />
+                    <input class="sound-button" type="image" src="images/icon_volume.png" />
                   </div>
                   <div class="col-10">
                     <div id="input-title">

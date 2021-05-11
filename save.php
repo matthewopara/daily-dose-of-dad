@@ -2,36 +2,33 @@
     require 'config/config.php';
     session_start();
 
+    $data = file_get_contents("php://input");
+    $data = json_decode($data);
+
     if (!isset($_SESSION["loggedIn"]) || empty($_SESSION["loggedIn"]) || $_SESSION["loggedIn"] == false) {
-        header("Location: index.php?success=false&loggedIn=false");
-        exit();
-    } else if (!isset($_POST['joke']) || empty($_POST['joke']) || !isset($_POST['voice-id'])) {
-        header("Location: index.php?success=false");
-        exit();
+        echo "0";
+    } else if ($data == NULL) {
+        echo "1";
     } else {
         $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
         if ($mysqli->connect_errno) {
             echo $mysqli->connect_error;
-            exit();
         }
 
         $statement = $mysqli->prepare("INSERT INTO saved_jokes(joke, users_id, voices_id) VALUES (?, ?, ?)");
-        $statement->bind_param("sii", $_POST["joke"], $_SESSION["userId"], $_POST["voice-id"]);
+        $statement->bind_param("sii", $data->joke, $_SESSION["userId"], $data->voiceId);
         $executed = $statement->execute();
         if (!$executed) {
             echo $mysqli->error;
         }
 
         if ($mysqli->affected_rows == 1) {
-			header("Location: index.php?success=true");
-            exit();
+			echo "2";
 		} else {
-			header("Location: index.php?success=false");
-            exit();
+			echo "1";
 		}
 
-
-        $mysqli.close();
+        $mysqli->close();
     }
 
 ?>

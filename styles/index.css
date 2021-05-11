@@ -42,7 +42,7 @@
     width: 100%;
 }
 
-#sound-button {
+.sound-button {
     width: 70%;
     margin-top: 15px;
     margin-left: auto;
