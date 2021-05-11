@@ -155,18 +155,17 @@ saveButton.addEventListener("click", function() {
     }
 })
 
-// if (get("loggedIn") == "false") {
-//     alert("You are not logged in")
-// } else if (get("success") == "false") {
-//     alert("An error occurred while trying to save the joke")
-// } else if (get("success") == "true") {
-//     alert("Joke was saved")
-// }
+window.onload = function() {
+    if (get("loggedIn") == "false") {
+        alert("You are not logged in")
+    }
+}
 
-// function get(name){
-//     if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
-//        return decodeURIComponent(name[1]);
-// }
+function get(name){
+    if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search)) {
+        return name[1]
+    }
+}
 
  function playAudio(mp3File) {
     let audioObj = new Audio(mp3File)
