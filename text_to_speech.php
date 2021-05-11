@@ -63,7 +63,7 @@
 
         $jokemp3s = scandir("jokemp3s");
         // minus 2 to ignore "." and ".."
-        if (count($jokemp3s) - 2 >= 30) {
+        if (count($jokemp3s) - 2 >= 35) {
             unlink("jokemp3s/" . $jokemp3s[2]);
         } 
         $myfile = fopen($file, "w");
