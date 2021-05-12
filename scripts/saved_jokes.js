@@ -86,13 +86,20 @@ function setUp() {
             // playDadJokeAudio("Hello")
             shakeInterval = setInterval(shake, 10, soundButtons[i])
             let jokeText = jokeTextDivs[i].innerText
+
+            let data = {
+                joke: jokeText,
+                jokeId: soundButton.dataset.jokeid,
+                voiceId: soundButton.dataset.voice,
+                hasNewVar: "false"
+            }
+            data = JSON.stringify(data)
             let httpRequest = new XMLHttpRequest()
-            // httpRequest.open("GET", "text_to_speech.php?joke=Funny&jokeId=" + soundButton.dataset.jokeid + "&voiceId=" + soundButton.dataset.voice)
-            httpRequest.open("GET", "text_to_speech.php?joke=" + encodeURIComponent(jokeText) +  "&jokeId=" + soundButton.dataset.jokeid + "&voiceId=" + soundButton.dataset.voice)
-            httpRequest.send()
-    
+            httpRequest.open("POST", "text_to_speech.php")
+            httpRequest.setRequestHeader("Content-Type", "application/json")
+            httpRequest.send(data)
+        
             httpRequest.onreadystatechange = function() {
-                // console.log(httpRequest.readyState)
         
                 // readyState == 4 when we have a full response
                 if (httpRequest.readyState == 4) {
@@ -100,12 +107,36 @@ function setUp() {
                     if (httpRequest.status == 200) {
                         // 200 means successful
                         playAudio(httpRequest.responseText)
+                        // set original jokes array to current jokes
                     } else {
                         console.log("Error")
                         console.log(httpRequest.status)
                     }
                 }
             }
+
+
+
+            // let httpRequest = new XMLHttpRequest()
+            // // httpRequest.open("GET", "text_to_speech.php?joke=Funny&jokeId=" + soundButton.dataset.jokeid + "&voiceId=" + soundButton.dataset.voice)
+            // httpRequest.open("GET", "text_to_speech.php?joke=" + encodeURIComponent(jokeText) +  "&jokeId=" + soundButton.dataset.jokeid + "&voiceId=" + soundButton.dataset.voice)
+            // httpRequest.send()
+    
+            // httpRequest.onreadystatechange = function() {
+            //     // console.log(httpRequest.readyState)
+        
+            //     // readyState == 4 when we have a full response
+            //     if (httpRequest.readyState == 4) {
+            //         // check for errors
+            //         if (httpRequest.status == 200) {
+            //             // 200 means successful
+            //             playAudio(httpRequest.responseText)
+            //         } else {
+            //             console.log("Error")
+            //             console.log(httpRequest.status)
+            //         }
+            //     }
+            // }
             return false
         }
     }

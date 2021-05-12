@@ -10,15 +10,18 @@
         "en-US_EmilyV3Voice"
     );
 
-    $joke = $_GET["joke"];
-    $jokeId = $_GET["jokeId"];
-    $voiceId = $_GET["voiceId"];
+    $data = file_get_contents("php://input");
+    $data = json_decode($data);
+
+    $joke = $data->joke;
+    $jokeId = $data->jokeId;
+    $voiceId = $data->voiceId;
 
     $filePrefix = "jokemp3s/joke" . $jokeId;
     $filename = "jokemp3s/joke" . $jokeId . ".mp3";
 
     if ($jokeId == "-1") {
-        if (!isset($_GET["new"]) || empty($_GET["new"]) || $_GET["new"] != "true") {
+        if (strcmp($data->hasNewVar, "true") == 0 && strcmp($data->new, "true") != 0) {
             echo getPresavedJokeMP3();
         } else {
             $presaved = getPresavedJokeMP3();

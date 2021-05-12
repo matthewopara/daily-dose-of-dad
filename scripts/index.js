@@ -38,13 +38,22 @@ soundButton.addEventListener("click", function() {
         lastAudioText = dadJokeBox.innerText
         lastAudioVoice = voiceSelector.value
     }
-    let httpRequest = new XMLHttpRequest()
 
-    httpRequest.open("GET", "text_to_speech.php?joke=" + encodeURIComponent(dadJokeBox.innerText) +  "&jokeId=-1&voiceId=" + voiceSelector.value + "&new=" + newJoke)
-    httpRequest.send()
+    let data = {
+        joke: dadJokeBox.innerText,
+        jokeId: "-1",
+        voiceId: voiceSelector.value,
+        hasNewVar: "true",
+        new: newJoke
+    }
+
+    data = JSON.stringify(data)
+    let httpRequest = new XMLHttpRequest()
+    httpRequest.open("POST", "text_to_speech.php")
+    httpRequest.setRequestHeader("Content-Type", "application/json")
+    httpRequest.send(data)
 
     httpRequest.onreadystatechange = function() {
-        // console.log(httpRequest.readyState)
 
         // readyState == 4 when we have a full response
         if (httpRequest.readyState == 4) {
@@ -52,12 +61,35 @@ soundButton.addEventListener("click", function() {
             if (httpRequest.status == 200) {
                 // 200 means successful
                 playAudio(httpRequest.responseText)
+                // set original jokes array to current jokes
             } else {
                 console.log("Error")
                 console.log(httpRequest.status)
             }
         }
     }
+
+
+    // let httpRequest = new XMLHttpRequest()
+
+    // httpRequest.open("GET", "text_to_speech.php?joke=" + encodeURIComponent(dadJokeBox.innerText) +  "&jokeId=-1&voiceId=" + voiceSelector.value + "&new=" + newJoke)
+    // httpRequest.send()
+
+    // httpRequest.onreadystatechange = function() {
+    //     // console.log(httpRequest.readyState)
+
+    //     // readyState == 4 when we have a full response
+    //     if (httpRequest.readyState == 4) {
+    //         // check for errors
+    //         if (httpRequest.status == 200) {
+    //             // 200 means successful
+    //             playAudio(httpRequest.responseText)
+    //         } else {
+    //             console.log("Error")
+    //             console.log(httpRequest.status)
+    //         }
+    //     }
+    // }
     return false
 })
 
